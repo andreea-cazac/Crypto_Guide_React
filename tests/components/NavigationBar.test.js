@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, fireEvent } from '@testing-library/react-native';
-import NavigationBar from '../components/NavigationBar';
+import NavigationBar from '../../components/NavigationBar';
 
 // Define the mock within the factory function
 jest.mock('expo-router', () => {

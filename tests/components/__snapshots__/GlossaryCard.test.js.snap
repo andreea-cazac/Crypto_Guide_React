@@ -1,0 +1,38 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`GlossaryCard matches the snapshot 1`] = `
+<View
+  style={
+    {
+      "backgroundColor": "#f5f5f5",
+      "borderRadius": 12,
+      "marginBottom": 16,
+      "padding": 16,
+    }
+  }
+>
+  <Text
+    style={
+      {
+        "color": "#14213D",
+        "fontSize": 18,
+        "fontWeight": "bold",
+        "marginBottom": 6,
+      }
+    }
+  >
+    Test Term
+  </Text>
+  <Text
+    style={
+      {
+        "color": "#333",
+        "fontSize": 14,
+        "lineHeight": 20,
+      }
+    }
+  >
+    This is a test meaning for the term.
+  </Text>
+</View>
+`;

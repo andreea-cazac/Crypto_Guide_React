@@ -4,6 +4,7 @@ import {Image, StyleSheet, TouchableOpacity} from 'react-native';
 import PropTypes from 'prop-types';
 import accountIcon from '../assets/icons/account.png';
 import {useRouter} from "expo-router";
+import {Colors} from "../constants/Colors";
 
 export default function AccountIcon({ style, ...props }) {
 
@@ -27,12 +28,13 @@ AccountIcon.propTypes = {
 const styles = StyleSheet.create({
     container: {
         position: 'absolute',
-        top: 40,
+        top: 25,
         right: 16,
         zIndex: 10,
     },
     image: {
-        width: 24,
-        height: 24,
+        width: 40,
+        height: 40,
+        tintColor: Colors.style.primary,
     },
 });

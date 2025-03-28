@@ -1,0 +1,167 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MessageBanner Component applies error styling when type is "error" 1`] = `
+<View
+  style={
+    [
+      {
+        "backgroundColor": "#eee",
+        "borderColor": "#ccc",
+        "borderRadius": 10,
+        "borderWidth": 1,
+        "marginVertical": 10,
+        "padding": 14,
+      },
+      {
+        "backgroundColor": "#ffe5e5",
+        "borderColor": "#cc0000",
+      },
+      false,
+    ]
+  }
+>
+  <Text
+    style={
+      {
+        "color": "#14213D",
+        "fontSize": 18,
+        "fontWeight": "bold",
+        "marginBottom": 4,
+      }
+    }
+  >
+    Test Title
+  </Text>
+  <Text
+    style={
+      {
+        "color": "#333",
+        "fontSize": 14,
+        "fontWeight": "400",
+      }
+    }
+  >
+    This is a test message.
+  </Text>
+</View>
+`;
+
+exports[`MessageBanner Component applies success styling when type is "success" 1`] = `
+<View
+  style={
+    [
+      {
+        "backgroundColor": "#eee",
+        "borderColor": "#ccc",
+        "borderRadius": 10,
+        "borderWidth": 1,
+        "marginVertical": 10,
+        "padding": 14,
+      },
+      false,
+      {
+        "backgroundColor": "#e5ffe5",
+        "borderColor": "#00aa00",
+      },
+    ]
+  }
+>
+  <Text
+    style={
+      {
+        "color": "#14213D",
+        "fontSize": 18,
+        "fontWeight": "bold",
+        "marginBottom": 4,
+      }
+    }
+  >
+    Test Title
+  </Text>
+  <Text
+    style={
+      {
+        "color": "#333",
+        "fontSize": 14,
+        "fontWeight": "400",
+      }
+    }
+  >
+    This is a test message.
+  </Text>
+</View>
+`;
+
+exports[`MessageBanner Component renders correctly with title and message 1`] = `
+<View
+  style={
+    [
+      {
+        "backgroundColor": "#eee",
+        "borderColor": "#ccc",
+        "borderRadius": 10,
+        "borderWidth": 1,
+        "marginVertical": 10,
+        "padding": 14,
+      },
+      false,
+      false,
+    ]
+  }
+>
+  <Text
+    style={
+      {
+        "color": "#14213D",
+        "fontSize": 18,
+        "fontWeight": "bold",
+        "marginBottom": 4,
+      }
+    }
+  >
+    Test Title
+  </Text>
+  <Text
+    style={
+      {
+        "color": "#333",
+        "fontSize": 14,
+        "fontWeight": "400",
+      }
+    }
+  >
+    This is a test message.
+  </Text>
+</View>
+`;
+
+exports[`MessageBanner Component renders correctly without a title 1`] = `
+<View
+  style={
+    [
+      {
+        "backgroundColor": "#eee",
+        "borderColor": "#ccc",
+        "borderRadius": 10,
+        "borderWidth": 1,
+        "marginVertical": 10,
+        "padding": 14,
+      },
+      false,
+      false,
+    ]
+  }
+>
+  <Text
+    style={
+      {
+        "color": "#333",
+        "fontSize": 14,
+        "fontWeight": "400",
+      }
+    }
+  >
+    This is a test message.
+  </Text>
+</View>
+`;

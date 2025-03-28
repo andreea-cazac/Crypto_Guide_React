@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, fireEvent } from '@testing-library/react-native';
-import BackArrow from '../components/BackArrow';
+import BackArrow from '../../components/BackArrow';
 
 // Define the mock inside the factory so it's self-contained.
 jest.mock('expo-router', () => {

@@ -2,8 +2,7 @@
 import { config as dotenvConfig } from 'dotenv';
 import 'dotenv/config'; // (optional, if you want automatic loading)
 
-const envFile = process.env.ENVFILE || '.env.development';
-console.log("Loading env file:", envFile);
+const envFile = process.env.ENVFILE || '.env.development'
 dotenvConfig({ path: envFile, override: true });
 
 

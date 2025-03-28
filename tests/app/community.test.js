@@ -1,6 +1,6 @@
 import React from 'react';
 import { render } from '@testing-library/react-native';
-import CommunityScreen from '../app/community';
+import CommunityScreen from '../../app/community';
 
 describe('CommunityScreen', () => {
     it('renders "Community Screen" text', () => {

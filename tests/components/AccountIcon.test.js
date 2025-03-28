@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, fireEvent } from '@testing-library/react-native';
-import AccountIcon from '../components/AccountIcon';
+import AccountIcon from '../../components/AccountIcon';
 
 jest.mock('expo-router', () => {
     // Define pushMock inside the factory so it’s in scope.

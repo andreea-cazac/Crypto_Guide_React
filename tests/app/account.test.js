@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, fireEvent } from '@testing-library/react-native';
-import AccountScreen from '../app/account';
+import AccountScreen from '../../app/account';
 
 // Stub useRouter so that router.push is available.
 const mockPush = jest.fn();

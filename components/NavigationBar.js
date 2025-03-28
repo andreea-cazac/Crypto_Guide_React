@@ -5,6 +5,7 @@ import { useRouter } from 'expo-router';
 import educationIcon from '../assets/icons/education.png';
 import feedIcon from '../assets/icons/feed.png';
 import communityIcon from '../assets/icons/community.png';
+import { Colors } from '../constants/Colors';
 
 export default function NavigationBar() {
     const router = useRouter();
@@ -38,5 +39,5 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         padding: 10,
     },
-    iconImage: { width: 24, height: 24, marginBottom: 4 },
+    iconImage: { width: 40, height: 40, tintColor: Colors.style.primary,},
 });

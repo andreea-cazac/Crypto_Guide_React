@@ -1,6 +1,6 @@
 import React from 'react';
 import { render } from '@testing-library/react-native';
-import Index from '../app/index';
+import Index from '../../app';
 
 jest.mock('expo-router', () => {
     const React = require('react');
@@ -20,8 +20,8 @@ jest.mock('expo-router', () => {
 });
 
 describe('Index', () => {
-    it('redirects to /main', () => {
+    it('redirects to /education', () => {
         const { getByText } = render(<Index />);
-        expect(getByText('/main')).toBeTruthy();
+        expect(getByText('/education')).toBeTruthy();
     });
 });
