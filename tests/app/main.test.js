@@ -1,6 +1,6 @@
 import React from 'react';
 import { render } from '@testing-library/react-native';
-import MainScreen from '../app/main';
+import MainScreen from '../../app/main';
 
 describe('MainScreen', () => {
     it('renders "Main Screen" text', () => {
