@@ -4,7 +4,7 @@ exports[`GlossaryCard matches the snapshot 1`] = `
 <View
   style={
     {
-      "backgroundColor": "#f5f5f5",
+      "backgroundColor": "#fff",
       "borderRadius": 12,
       "marginBottom": 16,
       "padding": 16,
@@ -26,7 +26,7 @@ exports[`GlossaryCard matches the snapshot 1`] = `
   <Text
     style={
       {
-        "color": "#333",
+        "color": "#14213D",
         "fontSize": 14,
         "lineHeight": 20,
       }

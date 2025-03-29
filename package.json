@@ -9,6 +9,7 @@
     "ios": "expo start --ios",
     "web": "expo start --web",
     "test": "jest",
+    "test:update": "jest -u",
     "coverage": "jest --coverage",
     "lint": "expo lint",
     "start:dev": "cross-env ENVFILE=.env.development npx expo start",

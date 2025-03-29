@@ -4,7 +4,7 @@ import Constants from "expo-constants";
 const API_BASE_URL = Constants.expoConfig?.extra?.api_base_url;
 
 const api = axios.create({
-    baseURL: API_BASE_URL, // <-- change to your backend root
+    baseURL: API_BASE_URL,
     headers: {
         'Content-Type': 'application/json',
     },

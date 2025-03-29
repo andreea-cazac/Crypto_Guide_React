@@ -4,7 +4,7 @@ import {Image, StyleSheet, TouchableOpacity} from 'react-native';
 import PropTypes from 'prop-types';
 import accountIcon from '../assets/icons/account.png';
 import {useRouter} from "expo-router";
-import {Colors} from "../constants/Colors";
+import {GlobalStyle} from "../constants/GlobalStyle";
 
 export default function AccountIcon({ style, ...props }) {
 
@@ -35,6 +35,6 @@ const styles = StyleSheet.create({
     image: {
         width: 40,
         height: 40,
-        tintColor: Colors.style.primary,
+        tintColor: GlobalStyle.colors.primary,
     },
 });

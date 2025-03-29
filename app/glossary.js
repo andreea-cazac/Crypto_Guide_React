@@ -1,13 +1,15 @@
-import React, { useEffect, useState } from 'react';
-import { View, Text, StyleSheet, ScrollView, ActivityIndicator, TouchableOpacity } from 'react-native';
-import { Colors } from '../constants/Colors';
-import MessageBanner from '../components/MessageBanner'; // ✅ Import
-import GlossaryCard from '../components/GlossaryCard';
-import BackArrow from "../components/BackArrow";
-import AccountIcon from "../components/AccountIcon";
-import { getAllGlossaryTerms } from '../services/api/glossaryApi';
-import { useAlphabetScroll } from '../hooks/useAlphabetScroll';
-import NavigationBar from "../components/NavigationBar";
+import React, {useEffect, useState} from 'react';
+import {ActivityIndicator, ScrollView, StyleSheet, Text, View} from 'react-native';
+import {GlobalStyle} from '../constants/GlobalStyle';
+import AlphabetBar from '../components/glossary/AlphabetBar';
+import GlossaryList from '../components/glossary/GlossaryList';
+import MessageBanner from '../components/MessageBanner';
+import BackArrow from '../components/BackArrow';
+import AccountIcon from '../components/AccountIcon';
+import NavigationBar from '../components/NavigationBar';
+import {getAllGlossaryTerms} from '../services/api/glossaryApi';
+import {useAlphabetScroll} from '../hooks/useAlphabetScroll';
+import {groupGlossaryTerms} from '../utils/groupGlossaryTerms';
 
 export default function GlossaryScreen() {
     const [groupedTerms, setGroupedTerms] = useState({});
@@ -20,24 +22,9 @@ export default function GlossaryScreen() {
         const fetchTerms = async () => {
             try {
                 const data = await getAllGlossaryTerms();
-
-                // Sort alphabetically by term (case-insensitive)
-                const sorted = data.sort((a, b) =>
-                    a.term.toLowerCase().localeCompare(b.term.toLowerCase())
-                );
-
-                // Group by first letter
-                const grouped = {};
-                for (const item of sorted) {
-                    const firstLetter = item.term[0].toUpperCase();
-                    if (!grouped[firstLetter]) {
-                        grouped[firstLetter] = [];
-                    }
-                    grouped[firstLetter].push(item);
-                }
-
+                const { grouped, alphabet } = groupGlossaryTerms(data);
                 setGroupedTerms(grouped);
-                setAlphabet(Object.keys(grouped).sort());
+                setAlphabet(alphabet);
             } catch (error) {
                 setErrorMessage({
                     title: 'Oops! Something went wrong',
@@ -52,7 +39,6 @@ export default function GlossaryScreen() {
         fetchTerms();
     }, []);
 
-
     return (
         <View style={styles.container}>
             <View style={styles.header}>
@@ -61,16 +47,10 @@ export default function GlossaryScreen() {
             </View>
 
             {alphabet.length > 0 && (
-                <View style={styles.letterBar}>
-                    {alphabet.map((letter) => (
-                        <TouchableOpacity key={letter} onPress={() => scrollToLetter(letter)}>
-                            <Text testID={`letter-bar-${letter}`} style={styles.letter}>{letter}</Text>
-                        </TouchableOpacity>
-                    ))}
-                </View>
+                <AlphabetBar alphabet={alphabet} onLetterPress={scrollToLetter} />
             )}
 
-            <Text style={styles.title}>Glossary</Text>
+            <Text style={GlobalStyle.components.title}>Glossary</Text>
 
             {errorMessage && (
                 <MessageBanner
@@ -81,20 +61,10 @@ export default function GlossaryScreen() {
             )}
 
             {loading ? (
-                <ActivityIndicator size="large" color={Colors.style.primary} />
+                <ActivityIndicator size="large" color={GlobalStyle.colors.primary} />
             ) : (
                 <ScrollView ref={scrollViewRef} contentContainerStyle={styles.cardsContainer}>
-                    {Object.entries(groupedTerms).map(([letter, group]) => (
-                        <View
-                            key={letter}
-                            ref={(ref) => (sectionRefs.current[letter] = ref)}
-                        >
-                            <Text testID={`group-header-${letter}`} style={styles.groupLetter}>{letter}</Text>
-                            {group.map((item) => (
-                                <GlossaryCard key={item.id} term={item.term} meaning={item.meaning} />
-                            ))}
-                        </View>
-                    ))}
+                    <GlossaryList groupedTerms={groupedTerms} sectionRefs={sectionRefs} />
                 </ScrollView>
             )}
 
@@ -106,18 +76,9 @@ export default function GlossaryScreen() {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#fff',
+        backgroundColor: GlobalStyle.colors.background,
         paddingHorizontal: 16,
         paddingTop: 5,
-    },
-    title: {
-        fontSize: 30,
-        fontWeight: 'bold',
-        marginVertical: 16,
-        color: Colors.style.primary,
-    },
-    cardsContainer: {
-        paddingBottom: 20,
     },
     header: {
         flexDirection: 'row',
@@ -125,26 +86,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         marginBottom: 100,
     },
-    groupLetter: {
-        fontSize: 32,
-        fontWeight: 'bold',
-        color: Colors.style.primary,
-        marginBottom: 12,
-        marginTop: 24,
-    },
-    letterBar: {
-        flexDirection: 'row',
-        flexWrap: 'wrap',
-        justifyContent: 'center',
-        alignItems: 'center',
-        marginBottom: 12,
-        marginTop: 25,
-        gap: 4,
-    },
-
-    letter: {
-        fontSize: 20,
-        color: Colors.style.primary,
-        marginHorizontal: 4,
+    cardsContainer: {
+        paddingBottom: 20,
     },
 });

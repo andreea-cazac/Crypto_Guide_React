@@ -1,11 +1,10 @@
-// components/NavigationBar.js
 import React from 'react';
-import {View, TouchableOpacity, StyleSheet, Image} from 'react-native';
-import { useRouter } from 'expo-router';
+import {Image, StyleSheet, TouchableOpacity, View} from 'react-native';
+import {useRouter} from 'expo-router';
 import educationIcon from '../assets/icons/education.png';
 import feedIcon from '../assets/icons/feed.png';
 import communityIcon from '../assets/icons/community.png';
-import { Colors } from '../constants/Colors';
+import {GlobalStyle} from '../constants/GlobalStyle';
 
 export default function NavigationBar() {
     const router = useRouter();
@@ -32,12 +31,16 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         height: 60,
         borderTopWidth: 1,
-        borderColor: '#ccc',
-        backgroundColor: '#fff',
+        borderColor: GlobalStyle.colors.secondary,
+        backgroundColor: GlobalStyle.colors.background,
     },
     icon: {
         alignItems: 'center',
         padding: 10,
     },
-    iconImage: { width: 40, height: 40, tintColor: Colors.style.primary,},
+    iconImage: {
+        width: 40,
+        height: 40,
+        tintColor: GlobalStyle.colors.primary,
+    },
 });
