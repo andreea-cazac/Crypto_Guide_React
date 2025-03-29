@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from 'react';
-import { View, Button, Alert, ActivityIndicator, StyleSheet } from 'react-native';
-import { useStripe } from '@stripe/stripe-react-native';
-import { useRouter } from 'expo-router';
+import React, {useEffect, useState} from 'react';
+import {ActivityIndicator, Alert, Button, StyleSheet, View} from 'react-native';
+import {useStripe} from '@stripe/stripe-react-native';
+import {useRouter} from 'expo-router';
+import {GlobalStyle} from "../constants/GlobalStyle";
 
 export default function PaymentScreen() {
     const { initPaymentSheet, presentPaymentSheet } = useStripe();
@@ -40,7 +41,7 @@ export default function PaymentScreen() {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
-                    email: 'testuser@example.com',
+                    email: 'johnaadspring@gmail.com',
                     priceId: process.env.EXPO_PUBLIC_STRIPE_PRICE_ID,
                     quantity: 1,
                 }),
@@ -98,6 +99,6 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: '#fff',
+        backgroundColor: GlobalStyle.colors.background,
     },
 });

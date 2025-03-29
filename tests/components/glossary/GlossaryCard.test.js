@@ -1,8 +1,8 @@
 // __tests__/GlossaryCard.test.js
 import React from 'react';
 import { render } from '@testing-library/react-native';
-import GlossaryCard from '../../components/GlossaryCard';
-import { Colors } from '../../constants/Colors';
+import GlossaryCard from '../../../components/glossary/GlossaryCard';
+import { GlobalStyle } from '../../../constants/GlobalStyle';
 
 describe('GlossaryCard', () => {
     const mockTerm = 'Test Term';

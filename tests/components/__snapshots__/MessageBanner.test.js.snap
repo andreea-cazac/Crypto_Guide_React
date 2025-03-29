@@ -5,15 +5,15 @@ exports[`MessageBanner Component applies error styling when type is "error" 1`] 
   style={
     [
       {
-        "backgroundColor": "#eee",
-        "borderColor": "#ccc",
+        "backgroundColor": "#fff",
+        "borderColor": "#14213D",
         "borderRadius": 10,
         "borderWidth": 1,
         "marginVertical": 10,
         "padding": 14,
       },
       {
-        "backgroundColor": "#ffe5e5",
+        "backgroundColor": "#fff",
         "borderColor": "#cc0000",
       },
       false,
@@ -35,7 +35,7 @@ exports[`MessageBanner Component applies error styling when type is "error" 1`] 
   <Text
     style={
       {
-        "color": "#333",
+        "color": "#14213D",
         "fontSize": 14,
         "fontWeight": "400",
       }
@@ -51,8 +51,8 @@ exports[`MessageBanner Component applies success styling when type is "success" 
   style={
     [
       {
-        "backgroundColor": "#eee",
-        "borderColor": "#ccc",
+        "backgroundColor": "#fff",
+        "borderColor": "#14213D",
         "borderRadius": 10,
         "borderWidth": 1,
         "marginVertical": 10,
@@ -60,7 +60,7 @@ exports[`MessageBanner Component applies success styling when type is "success" 
       },
       false,
       {
-        "backgroundColor": "#e5ffe5",
+        "backgroundColor": "#fff",
         "borderColor": "#00aa00",
       },
     ]
@@ -81,7 +81,7 @@ exports[`MessageBanner Component applies success styling when type is "success" 
   <Text
     style={
       {
-        "color": "#333",
+        "color": "#14213D",
         "fontSize": 14,
         "fontWeight": "400",
       }
@@ -97,8 +97,8 @@ exports[`MessageBanner Component renders correctly with title and message 1`] = 
   style={
     [
       {
-        "backgroundColor": "#eee",
-        "borderColor": "#ccc",
+        "backgroundColor": "#fff",
+        "borderColor": "#14213D",
         "borderRadius": 10,
         "borderWidth": 1,
         "marginVertical": 10,
@@ -124,7 +124,7 @@ exports[`MessageBanner Component renders correctly with title and message 1`] = 
   <Text
     style={
       {
-        "color": "#333",
+        "color": "#14213D",
         "fontSize": 14,
         "fontWeight": "400",
       }
@@ -140,8 +140,8 @@ exports[`MessageBanner Component renders correctly without a title 1`] = `
   style={
     [
       {
-        "backgroundColor": "#eee",
-        "borderColor": "#ccc",
+        "backgroundColor": "#fff",
+        "borderColor": "#14213D",
         "borderRadius": 10,
         "borderWidth": 1,
         "marginVertical": 10,
@@ -155,7 +155,7 @@ exports[`MessageBanner Component renders correctly without a title 1`] = `
   <Text
     style={
       {
-        "color": "#333",
+        "color": "#14213D",
         "fontSize": 14,
         "fontWeight": "400",
       }

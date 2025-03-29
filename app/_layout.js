@@ -1,8 +1,7 @@
-// app/_layout.js
 import React from 'react';
-import { StripeProvider } from '@stripe/stripe-react-native';
-import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
-import { Slot } from 'expo-router';
+import {StripeProvider} from '@stripe/stripe-react-native';
+import {SafeAreaProvider, SafeAreaView} from 'react-native-safe-area-context';
+import {Slot} from 'expo-router';
 
 export default function RootLayout() {
     return (

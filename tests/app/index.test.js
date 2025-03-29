@@ -20,8 +20,8 @@ jest.mock('expo-router', () => {
 });
 
 describe('Index', () => {
-    it('redirects to /education', () => {
+    it('redirects to main feed', () => {
         const { getByText } = render(<Index />);
-        expect(getByText('/education')).toBeTruthy();
+        expect(getByText('/main')).toBeTruthy();
     });
 });

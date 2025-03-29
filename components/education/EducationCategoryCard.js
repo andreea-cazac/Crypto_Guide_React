@@ -1,6 +1,6 @@
 import React from 'react';
-import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native';
-import {Colors} from "../constants/Colors";
+import {Image, StyleSheet, Text, TouchableOpacity} from 'react-native';
+import {GlobalStyle} from "../../constants/GlobalStyle";
 
 const EducationCategoryCard = ({ title, icon, onPress }) => {
     return (
@@ -21,19 +21,19 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         marginBottom: 16,
         marginHorizontal: 10,
-        backgroundColor: Colors.style.primary,
+        backgroundColor: GlobalStyle.colors.primary,
     },
     icon: {
         width: 80,
         height: 80,
         marginBottom: 10,
-        tintColor: Colors.style.secondary,
+        tintColor: GlobalStyle.colors.secondary,
     },
     title: {
         fontSize: 20,
         fontWeight: '500',
         textAlign: 'center',
-        color: Colors.style.secondary,
+        color: GlobalStyle.colors.secondary,
     },
 });
 

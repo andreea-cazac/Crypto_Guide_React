@@ -1,9 +1,9 @@
-// app/community.js
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import {StyleSheet, Text, View} from 'react-native';
 import NavigationBar from '../components/NavigationBar';
 import AccountIcon from "../components/AccountIcon";
 import BackArrow from "../components/BackArrow";
+import {GlobalStyle} from "../constants/GlobalStyle";
 
 export default function CommunityScreen() {
     return (
@@ -21,7 +21,7 @@ export default function CommunityScreen() {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#fff',
+        backgroundColor: GlobalStyle.colors.background,
     },
     content: {
         flex: 1,

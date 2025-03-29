@@ -1,6 +1,6 @@
 import React from 'react';
-import { View, Button, StyleSheet } from 'react-native';
-import { useRouter } from 'expo-router';
+import {Button, StyleSheet, View} from 'react-native';
+import {useRouter} from 'expo-router';
 import BackArrow from '../components/BackArrow';
 
 export default function AccountScreen() {
