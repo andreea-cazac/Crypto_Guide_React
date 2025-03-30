@@ -35,6 +35,14 @@ describe('EducationScreen', () => {
         expect(mockPush).toHaveBeenCalledWith('/glossary');
     });
 
+    it('calls router.push with "/exchange" when Glossary card is pressed', () => {
+        const { getByText } = render(<EducationScreen />);
+        // Find the card by its title text "Glossary"
+        const exchangeCard = getByText('Exchange');
+        fireEvent.press(exchangeCard);
+        expect(mockPush).toHaveBeenCalledWith('/exchange');
+    });
+
     it('renders at least two EducationCategoryCards with correct titles', () => {
         const { getByText } = render(<EducationScreen />);
         expect(getByText('Glossary')).toBeTruthy();

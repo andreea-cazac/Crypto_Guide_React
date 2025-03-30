@@ -70,9 +70,10 @@ const styles = StyleSheet.create({
         marginRight: 8,
     },
     lastUpdated: {
-        fontSize: 14,
+        fontSize: 10,
         color: GlobalStyle.colors.primary,
         marginBottom: 20,
+        fontStyle: 'italic',
     },
     last24hContainer: {
         flexDirection: 'row',

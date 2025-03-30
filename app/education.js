@@ -24,7 +24,7 @@ export default function EducationScreen() {
 
             <ScrollView contentContainerStyle={styles.cardsContainer}>
                 <EducationCategoryCard title="Glossary" icon={glossaryIcon} onPress={() => router.push('/glossary')} />
-                <EducationCategoryCard title="Exchange" icon={exchangeIcon} onPress={() => console.log('Exchange pressed')} />
+                <EducationCategoryCard title="Exchange" icon={exchangeIcon} onPress={() => router.push('/exchange')} />
                 <EducationCategoryCard title="Other" icon={glossaryIcon} onPress={() => console.log('Glossary pressed')} />
                 <EducationCategoryCard title="Other" icon={exchangeIcon} onPress={() => console.log('Exchange pressed')} />
                 <EducationCategoryCard title="Other" icon={glossaryIcon} onPress={() => console.log('Glossary pressed')} />
@@ -48,7 +48,6 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
-        marginBottom: 100,
     },
     cardsContainer: {
         flexDirection: 'row',
