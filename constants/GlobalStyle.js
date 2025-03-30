@@ -1,5 +1,5 @@
 const primaryColor = '#14213D';
-const secondaryColor = '#AEC6CF';
+const secondaryColor = '#AFD5F0';
 const white = '#fff';
 const gray = '#555';
 const errorColor = '#cc0000';
