@@ -4,12 +4,13 @@ import NavigationBar from '../components/NavigationBar';
 import AccountIcon from "../components/AccountIcon";
 import BackArrow from "../components/BackArrow";
 import {GlobalStyle} from "../constants/GlobalStyle";
+import Header from "../components/Header";
 
 export default function CommunityScreen() {
     return (
         <View testID="CommunityScreen" style={styles.container}>
-                <BackArrow />
-                <AccountIcon/>
+            <Header showBack={true} showAccount={true} />
+
             <View style={styles.content}>
                 <Text style={styles.title}>Community</Text>
             </View>

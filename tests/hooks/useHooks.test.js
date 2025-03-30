@@ -6,10 +6,15 @@ import {useExchangeArticles} from '../../hooks/useExchangeArticles';
 import * as categoryApi from '../../services/api/categoryApi';
 import {getAllCoins} from '../../services/api/coinsApi';
 import {getLatestNews} from '../../services/api/newsApi';
-import { useResolvedArticleContent } from '../../hooks/useResolvedArticleContent';
+import {useResolvedArticleContent} from '../../hooks/useResolvedArticleContent';
 import * as dexApi from '../../services/api/dexApi';
+import * as glossaryApi from '../../services/api/glossaryApi';
+import {useGlossaryTerms} from '../../hooks/useGlossaryTerms';
+import {groupGlossaryTerms} from '../../utils/groupGlossaryTerms';
 
 jest.mock('../../services/api/dexApi');
+jest.mock('../../services/api/glossaryApi');
+jest.mock('../../utils/groupGlossaryTerms');
 
 jest.mock('../../services/api/coinsApi', () => ({
     getAllCoins: jest.fn(),
@@ -126,7 +131,11 @@ describe('useExchangeArticles', () => {
         const { result } = renderHook(() => useExchangeArticles());
 
         await waitFor(() => expect(result.current.loading).toBe(false));
-        expect(result.current.errorMessage).toBe('Exchange category not found.');
+        expect(result.current.errorMessage).toMatchObject({
+            title: 'Exchange category not found',
+            message: 'Please make sure the Exchange section exists in the backend.',
+            type: 'error'
+        });
     });
 });
 
@@ -164,7 +173,48 @@ describe('useResolvedArticleContent', () => {
         );
 
         await waitFor(() =>
-            expect(result.current.resolvedContent).toBe('Unable to load DEX platforms at the moment.')
+            expect(result.current.errorMessage).toMatchObject({
+                type: 'error',
+                title: 'DEX Platforms Load Error',
+                message: 'Unable to load DEX platforms at the moment. Please try again later.'
+            })
         );
+    });
+});
+
+
+describe('useGlossaryTerms', () => {
+    it('returns grouped terms and alphabet when API call succeeds', async () => {
+        const mockTerms = [
+            { id: 1, term: 'Altcoin', meaning: 'Alternative coin' }
+        ];
+        const mockGrouped = { A: [mockTerms[0]] };
+        const mockAlphabet = ['A'];
+
+        glossaryApi.getAllGlossaryTerms.mockResolvedValueOnce(mockTerms);
+        groupGlossaryTerms.mockReturnValueOnce({
+            grouped: mockGrouped,
+            alphabet: mockAlphabet
+        });
+
+        const { result } = renderHook(() => useGlossaryTerms());
+        await waitFor(() => expect(result.current.loading).toBe(false));
+
+        expect(result.current.groupedTerms).toEqual(mockGrouped);
+        expect(result.current.alphabet).toEqual(mockAlphabet);
+        expect(result.current.errorMessage).toBeNull();
+    });
+
+    it('sets errorMessage if API call fails', async () => {
+        glossaryApi.getAllGlossaryTerms.mockRejectedValueOnce(new Error('API failed'));
+
+        const { result } = renderHook(() => useGlossaryTerms());
+        await waitFor(() => expect(result.current.loading).toBe(false));
+
+        expect(result.current.errorMessage).toMatchObject({
+            title: 'Oops! Something went wrong',
+            message: expect.any(String),
+            type: 'error',
+        });
     });
 });

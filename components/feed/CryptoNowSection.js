@@ -38,22 +38,18 @@ export default function CryptoNowSection({ coins, loading, errorMessage, lastUpd
                     />
                     <View style={styles.cardNavigation}>
                         <Text
-                            style={[
-                                styles.arrow,
-                                currentIndex === 0 && { opacity: 0.3 },
-                            ]}
+                            style={[styles.arrow, currentIndex === 0 && { opacity: 0.3 }]}
                             onPress={() => setCurrentIndex((prev) => Math.max(prev - 1, 0))}
                         >
                             ←
                         </Text>
-                        <Text style={styles.subtleText}>
-                            Click on arrows to see more coins
-                        </Text>
+
+                        <View style={styles.centeredTextWrapper}>
+                            <Text style={styles.subtleText}>Click on arrows to see more coins</Text>
+                        </View>
+
                         <Text
-                            style={[
-                                styles.arrow,
-                                currentIndex === cards.length - 1 && { opacity: 0.3 },
-                            ]}
+                            style={[styles.arrow, currentIndex === cards.length - 1 && { opacity: 0.3 }]}
                             onPress={() => setCurrentIndex((prev) => Math.min(prev + 1, cards.length - 1))}
                         >
                             →
@@ -69,7 +65,7 @@ const styles = StyleSheet.create({
     cardNavigation: {
         flexDirection: 'row',
         justifyContent: 'space-between',
-        alignItems: 'center',
+        alignItems: 'center', // important
         marginBottom: 12,
         marginTop: 12,
         paddingHorizontal: 12,
@@ -79,10 +75,14 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         color: GlobalStyle.colors.primary,
     },
+    centeredTextWrapper: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
     subtleText: {
         fontSize: 12,
         color: GlobalStyle.colors.subtleText,
         textAlign: 'center',
-        marginBottom: 8,
     },
 });

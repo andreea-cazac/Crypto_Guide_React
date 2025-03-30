@@ -6,13 +6,14 @@ import {GlobalStyle} from "../constants/GlobalStyle";
 import {useCryptoData} from '../hooks/useCryptoData';
 import CryptoNowSection from '../components/feed/CryptoNowSection';
 import LatestNewsSection from "../components/feed/LatestNewsSection";
+import Header from "../components/Header";
 
 export default function MainScreen() {
     const { coins, loading, errorMessage, lastUpdated } = useCryptoData();
 
     return (
         <View testID="MainScreen" style={styles.container}>
-            <AccountIcon />
+            <Header showBack={false} showAccount={true} />
             <View style={styles.content}>
                 <CryptoNowSection
                     coins={coins}
@@ -36,6 +37,5 @@ const styles = StyleSheet.create({
     content: {
         flex: 1,
         paddingHorizontal: 16,
-        paddingTop: 60,
     },
 });

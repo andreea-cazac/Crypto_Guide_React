@@ -1,5 +1,5 @@
 import React from 'react';
-import {Image, StyleSheet, Text, View} from 'react-native';
+import {Platform, Image, StyleSheet, Text, View} from 'react-native';
 import {GlobalStyle} from '../../constants/GlobalStyle';
 import {formatDate, formatTime} from '../../utils/formatDateTime';
 
@@ -48,13 +48,20 @@ const styles = StyleSheet.create({
         backgroundColor: GlobalStyle.colors.background,
         padding: 16,
         borderRadius: 12,
-        shadowColor: GlobalStyle.colors.primary,
-        shadowOffset: { width: 0, height: 1 },
-        shadowOpacity: 0.1,
-        shadowRadius: 4,
+        ...Platform.select({
+            ios: {
+                shadowColor: GlobalStyle.colors.primary,
+                shadowOffset: { width: 0, height: 1 },
+                shadowOpacity: 0.1,
+                shadowRadius: 4,
+            },
+            android: {
+                elevation: 4, // <-- this gives the shadow on Android
+            },
+        }),
     },
     symbolAndPrice: {
-        fontSize: 28,
+        fontSize: 24,
         fontWeight: 'bold',
         color: GlobalStyle.colors.primary,
         marginBottom: 5,
@@ -81,12 +88,12 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     last24hLabel: {
-        fontSize: 20,
+        fontSize: 17,
         fontWeight: 'bold',
         color: GlobalStyle.colors.primary,
     },
     percentChange: {
-        fontSize: 20,
+        fontSize: 17,
         fontWeight: 'bold',
         marginLeft: 4,
     },
