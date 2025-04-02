@@ -24,4 +24,18 @@ describe('ArticleContentCard', () => {
         expect(getByText('Uniswap')).toBeTruthy();
         expect(getByText('12%')).toBeTruthy();
     });
+
+    it('renders error message banner when errorMessage is provided', () => {
+        const { getByText } = render(
+            <ArticleContentCard
+                title="Error Test"
+                content="This should not be visible"
+                tableData={[]}
+                errorMessage={{ type: 'error', message: 'Something went wrong' }}
+            />
+        );
+
+        expect(getByText('Something went wrong')).toBeTruthy();
+    });
+
 });

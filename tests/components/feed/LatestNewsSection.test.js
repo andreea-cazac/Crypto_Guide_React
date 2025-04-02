@@ -5,6 +5,14 @@ import { useNewsData } from '../../../hooks/useNewsData';
 
 jest.mock('../../../hooks/useNewsData');
 
+// Mock AsyncStorage default export
+jest.mock('@react-native-async-storage/async-storage', () => ({
+    __esModule: true,
+    default: {
+        setItem: jest.fn(),
+    },
+}));
+
 describe('LatestNewsSection', () => {
     it('shows loader while loading', () => {
         useNewsData.mockReturnValue({ news: [], loading: true });

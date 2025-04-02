@@ -32,4 +32,5 @@ describe('CryptoNowSection', () => {
         fireEvent.press(getByText('→'));
         expect(getByText(/ETH/)).toBeTruthy();
     });
+
 });

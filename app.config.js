@@ -47,6 +47,7 @@ export default ({ config }) => ({
     },
     // Use your environment variables here.
     extra: {
+        environment: process.env.ENVIRONMENT,
         api_base_url: process.env.EXPO_PUBLIC_API_URL, // e.g., "http://192.168.178.90:8080"
         payment_endpoint: process.env.EXPO_PUBLIC_PAYMENT_ENDPOINT, // e.g., "http://192.168.178.90:8080/stripe/subscription"
         stripePriceId: process.env.EXPO_PUBLIC_STRIPE_PRICE_ID, // e.g., "price_1R1U1o4gHyUjWEHaEqEYcyHd"
