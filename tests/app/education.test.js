@@ -48,4 +48,24 @@ describe('EducationScreen', () => {
         expect(getByText('Glossary')).toBeTruthy();
         expect(getByText('Exchange')).toBeTruthy();
     });
+
+    it('logs when "Other" EducationCategoryCards are pressed', () => {
+        const consoleSpy = jest.spyOn(console, 'log').mockImplementation(() => {});
+        const { getAllByText } = render(<EducationScreen />);
+
+        // There are multiple "Other" cards, get them all
+        const otherCards = getAllByText('Other');
+
+        // Tap each card to trigger its onPress
+        otherCards.forEach(card => {
+            fireEvent.press(card);
+        });
+
+        // You can expect exact logs if you want:
+        expect(consoleSpy).toHaveBeenCalledWith('Glossary pressed');
+        expect(consoleSpy).toHaveBeenCalledWith('Exchange pressed');
+
+        consoleSpy.mockRestore();
+    });
+
 });

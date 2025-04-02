@@ -13,6 +13,10 @@ jest.mock('../../services/api/glossaryApi', () => ({
 jest.mock('../../hooks/useAlphabetScroll', () => ({
     useAlphabetScroll: jest.fn(),
 }));
+jest.mock('@react-native-async-storage/async-storage', () => ({
+    getItem: jest.fn(() => Promise.resolve('mock.jwt.token')),
+    setItem: jest.fn(),
+}));
 
 describe('GlossaryScreen', () => {
     // Sample data for a successful API response

@@ -24,6 +24,11 @@ jest.mock('../../services/api/newsApi', () => ({
     getLatestNews: jest.fn(),
 }));
 
+jest.mock('@react-native-async-storage/async-storage', () => ({
+    getItem: jest.fn(() => Promise.resolve('mock.jwt.token')),
+    setItem: jest.fn(),
+}));
+
 describe('useCryptoData', () => {
     it('fetches and sets coins data successfully', async () => {
         const mockData = [{ symbol: 'BTC', price: 123 }];

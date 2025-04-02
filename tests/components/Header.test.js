@@ -26,4 +26,11 @@ describe('Header component', () => {
         expect(queryByTestId('back-arrow')).toBeNull();
         expect(queryByTestId('account-btn')).toBeNull();
     });
+
+    it('renders with default props (showBack and showAccount are true)', () => {
+        const { getByTestId } = render(<Header />);
+        expect(getByTestId('back-arrow')).toBeTruthy();
+        expect(getByTestId('account-btn')).toBeTruthy();
+    });
+
 });

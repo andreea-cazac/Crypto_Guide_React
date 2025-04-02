@@ -1,7 +1,6 @@
 import React from 'react';
 import {StyleSheet, View} from 'react-native';
 import NavigationBar from '../components/NavigationBar';
-import AccountIcon from "../components/AccountIcon";
 import {GlobalStyle} from "../constants/GlobalStyle";
 import {useCryptoData} from '../hooks/useCryptoData';
 import CryptoNowSection from '../components/feed/CryptoNowSection';
