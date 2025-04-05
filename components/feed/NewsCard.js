@@ -1,13 +1,19 @@
 import React from 'react';
 import {Image, StyleSheet, Text, View} from 'react-native';
 import {GlobalStyle} from '../../constants/GlobalStyle';
-import { getValidImageSource } from '../../utils/imageDisplay';
-import { convertUnixToDate, formatDate, formatTime, getTimeAgo } from '../../utils/formatDateTime';
+import {getValidImageSource} from '../../utils/imageDisplay';
+import {convertUnixToDate, getTimeAgo} from '../../utils/formatDateTime';
 
-export default function NewsCard({ title, source, imageUrl, readingTime, publishedOn }) {
+export default function NewsCard({
+                                     title,
+                                     source,
+                                     imageUrl,
+                                     readingTime,
+                                     publishedOn,
+                                     content,
+                                     showContent = false
+                                 }) {
     const publishedDateObj = convertUnixToDate(publishedOn);
-    const time = formatTime(publishedDateObj);
-    const date = formatDate(publishedDateObj);
     const timeAgo = getTimeAgo(publishedDateObj);
 
     return (
@@ -15,13 +21,16 @@ export default function NewsCard({ title, source, imageUrl, readingTime, publish
             <View style={styles.newsContent}>
                 <Image source={getValidImageSource(imageUrl)} style={styles.newsImage} resizeMode="contain" />
                 <View style={styles.textContent}>
-                    <View>
-                        <Text style={styles.newsTitle}>{title}</Text>
-                    </View>
+                    <Text style={styles.newsTitle}>{title}</Text>
+                    <Text style={styles.timeAgo}>{"Source: " + source}</Text>
                     <Text style={styles.timeAgo}>{timeAgo}</Text>
                     <Text style={styles.newsTime}>{readingTime} min read</Text>
                 </View>
             </View>
+
+            {showContent && content && (
+                <Text style={styles.newsBody}>{content}</Text>
+            )}
         </View>
     );
 }
@@ -66,12 +75,18 @@ const styles = StyleSheet.create({
     },
     publishedOn: {
         fontSize: 10,
-        color: '#888',
+        color: GlobalStyle.colors.subtleText,
         marginBottom: 4,
     },
     timeAgo: {
         fontSize: 12,
-        color: '#aaa',
+        color: GlobalStyle.colors.subtleText,
         fontStyle: 'italic',
+    },
+    newsBody: {
+        marginTop: 50,
+        fontSize: 18,
+        color: GlobalStyle.colors.text,
+        lineHeight: 20,
     },
 });

@@ -1,6 +1,6 @@
 import React from 'react';
-import { render } from '@testing-library/react-native';
-import ArticleContentCard from '../../../components/exchange/ArticleContentCard';
+import {render} from '@testing-library/react-native';
+import ArticleContentCard from '../../../components/education/ArticleContentCard';
 
 describe('ArticleContentCard', () => {
     it('renders text content if not table article', () => {

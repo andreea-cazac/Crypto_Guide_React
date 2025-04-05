@@ -1,7 +1,6 @@
-// 📁 hooks/useExchangeArticles.js
 import {useEffect, useState} from 'react';
 import {getAllCategories} from '../services/api/categoryApi';
-import { sortArticlesById } from '../utils/sortArticlesById';
+import {sortArticlesById} from '../utils/sortArticlesById';
 
 export const useExchangeArticles = () => {
     const [articles, setArticles] = useState([]);
@@ -25,7 +24,7 @@ export const useExchangeArticles = () => {
 
                 const sortedArticles = sortArticlesById(exchangeCategory.articles || []);
                 setArticles(sortedArticles);
-            } catch (error) {
+            } catch (_error) {
                 setErrorMessage({
                     type: 'error',
                     title: 'Oops! Something went wrong',

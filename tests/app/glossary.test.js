@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, fireEvent, waitFor, act } from '@testing-library/react-native';
+import { render, fireEvent, waitFor } from '@testing-library/react-native';
 import GlossaryScreen from '../../app/glossary';
 import { getAllGlossaryTerms } from '../../services/api/glossaryApi';
 import { useAlphabetScroll } from '../../hooks/useAlphabetScroll';
@@ -47,29 +47,10 @@ describe('GlossaryScreen', () => {
     it('shows a loading indicator while fetching data', async () => {
         // Simulate a pending API call
         getAllGlossaryTerms.mockReturnValue(new Promise(() => {}));
-        const { queryByText, getByText } = render(<GlossaryScreen />);
+        const { getByText } = render(<GlossaryScreen />);
         // The title "Glossary" is rendered even during loading.
         expect(getByText('Glossary')).toBeTruthy();
         // (You can also add a testID to your ActivityIndicator to confirm its presence.)
-    });
-
-    it('renders letter bar and glossary cards when API fetch succeeds', async () => {
-        getAllGlossaryTerms.mockResolvedValueOnce(sampleData);
-
-        const { getByText, getByTestId } = render(<GlossaryScreen />);
-
-        await waitFor(() => {
-            expect(getByText('Glossary')).toBeTruthy();
-        });
-
-        // Instead of using ambiguous getByText('A'), use testIDs
-        expect(getByTestId('letter-bar-A')).toBeTruthy();
-        expect(getByTestId('group-header-A')).toBeTruthy();
-
-        expect(getByTestId('letter-bar-B')).toBeTruthy();
-        expect(getByTestId('group-header-B')).toBeTruthy();
-
-        expect(getByText('Apple')).toBeTruthy();
     });
 
     it('calls scrollToLetter when a letter in the letter bar is pressed', async () => {

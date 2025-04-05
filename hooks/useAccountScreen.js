@@ -1,34 +1,31 @@
-// hooks/useAccountScreen.js
-import { useState, useEffect } from 'react';
+import {useEffect, useState} from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { jwtDecode } from 'jwt-decode';
-import { useRouter } from 'expo-router';
-import { useAccountActions } from './useAccountActions';
-import { useApiConfig } from './useApiConfig';
+import {jwtDecode} from 'jwt-decode';
+import {useRouter} from 'expo-router';
+import {useAccountActions} from './useAccountActions';
 
 export const useAccountScreen = () => {
     const router = useRouter();
     const { updatePassword, logout } = useAccountActions();
-    const { config } = useApiConfig();
-
     const [isAdmin, setIsAdmin] = useState(false);
+    const [isSubscribed, setIsSubscribed] = useState(false);
     const [showUpdateForm, setShowUpdateForm] = useState(false);
     const [currentPassword, setCurrentPassword] = useState('');
     const [newPassword, setNewPassword] = useState('');
 
-    // Detect admin role by decoding the JWT stored in AsyncStorage
     useEffect(() => {
         const checkRole = async () => {
             try {
                 const token = await AsyncStorage.getItem('jwtToken');
-                if (token) {
+                if (token && token.split('.').length === 3) {
                     const decoded = jwtDecode(token);
                     const roles = decoded.role;
                     const admin = roles && Array.isArray(roles) && roles.some(r => r.authority === 'ROLE_admin');
                     setIsAdmin(admin);
+                    setIsSubscribed(decoded.activeSubscription === true);
                 }
-            } catch (error) {
-                console.error('Error decoding token', error);
+            } catch (_error) {
+// Intentionally left blank
             }
         };
         checkRole();
@@ -50,7 +47,10 @@ export const useAccountScreen = () => {
         });
     };
 
-    const handleSubscribe = () => router.push('/payment');
+    const handleSubscribe = async () => {
+        //const token = await AsyncStorage.getItem('jwtToken');
+        router.push('/payment');
+    }
 
     const handleUserRoleTest = () => {
         router.push('/main');
@@ -60,6 +60,7 @@ export const useAccountScreen = () => {
 
     return {
         isAdmin,
+        isSubscribed,
         showUpdateForm,
         currentPassword,
         newPassword,

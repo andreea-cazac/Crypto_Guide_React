@@ -41,7 +41,7 @@ describe('useAccountActions', () => {
             });
 
             expect(alertSpy).toHaveBeenCalledWith(
-                'Validation Error',
+                'Error',
                 'Please fill in both current and new password fields.'
             );
         });
@@ -63,7 +63,6 @@ describe('useAccountActions', () => {
             jwtDecode.mockReturnValue({ sub: 'test@example.com' });
             updatePasswordApi.mockResolvedValue();
 
-            const onSuccess = jest.fn();
             await act(async () => {
                 await confirmButton.onPress();
             });

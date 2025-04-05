@@ -1,7 +1,7 @@
 import React from 'react';
-import { render, fireEvent } from '@testing-library/react-native';
-import ArticleTitleCard from '../../../components/exchange/ArticleTitleCard';
-import { useRouter } from 'expo-router';
+import {fireEvent, render} from '@testing-library/react-native';
+import ArticleTitleCard from '../../../components/education/ArticleTitleCard';
+import {useRouter} from 'expo-router';
 
 jest.mock('expo-router', () => ({
     useRouter: jest.fn(),
@@ -21,7 +21,7 @@ describe('ArticleTitleCard', () => {
 
         fireEvent.press(titleElement);
         expect(mockPush).toHaveBeenCalledWith({
-            pathname: '/article',
+            pathname: '/education/article',
             params: { title: 'Example Title', content: 'Hello content' },
         });
     });

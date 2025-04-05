@@ -3,10 +3,34 @@ import {Image, StyleSheet, Text, TouchableOpacity} from 'react-native';
 import {GlobalStyle} from "../../constants/GlobalStyle";
 
 const EducationCategoryCard = ({ title, icon, onPress }) => {
+    const isGlossary = title.toLowerCase() === 'glossary';
+
     return (
-        <TouchableOpacity accessibilityRole="button" style={styles.cardContainer} onPress={onPress}>
-            <Image source={icon} testID="education-icon" style={styles.icon} resizeMode="contain" />
-            <Text style={styles.title}>{title}</Text>
+        <TouchableOpacity
+            accessibilityRole="button"
+            style={[
+                styles.cardContainer,
+                isGlossary && { backgroundColor: GlobalStyle.colors.secondary }
+            ]}
+            onPress={onPress}
+        >
+            <Image
+                source={icon}
+                testID="education-icon"
+                style={[
+                    styles.icon,
+                    isGlossary && { tintColor: GlobalStyle.colors.primary }
+                ]}
+                resizeMode="contain"
+            />
+            <Text
+                style={[
+                    styles.title,
+                    isGlossary && { color: GlobalStyle.colors.primary }
+                ]}
+            >
+                {title}
+            </Text>
         </TouchableOpacity>
     );
 };

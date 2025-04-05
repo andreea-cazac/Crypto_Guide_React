@@ -4,8 +4,12 @@ import { getAllCoins } from '../../services/api/coinsApi';
 import { getLatestNews } from '../../services/api/newsApi';
 import {getAllGlossaryTerms} from "../../services/api/glossaryApi";
 import { getAllDexChanges } from '../../services/api/dexApi';
+import { getAllCategories } from '../../services/api/categoryApi';
 
 jest.mock('../../services/interceptor/axiosInterceptor');
+jest.mock('@react-native-async-storage/async-storage', () =>
+    require('@react-native-async-storage/async-storage/jest/async-storage-mock')
+);
 
 describe('getAllCoins', () => {
     it('returns data when successful', async () => {
@@ -54,7 +58,6 @@ describe('getAllGlossaryTerms', () => {
         await expect(getAllGlossaryTerms()).rejects.toThrow('Failed to load glossary terms');
     });
 });
-import { getAllCategories } from '../../services/api/categoryApi';
 
 describe('getAllCategories', () => {
     it('returns categories data on success', async () => {

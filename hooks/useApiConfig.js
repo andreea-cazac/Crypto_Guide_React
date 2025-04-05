@@ -1,40 +1,60 @@
-import { useState, useEffect } from 'react';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import {useEffect, useState} from 'react';
+import api from '../services/interceptor/axiosInterceptor'; // Use the interceptor instance!
 
-const CONFIG_KEY = 'apiConfig';
-const defaultConfig = {
-    news: 'external',
-    coins: 'external'
-};
+function toClientConfig(serverConfig) {
+    return {
+        news: serverConfig.useLocalNews ? 'local' : 'external',
+        coins: serverConfig.useLocalCoins ? 'local' : 'external',
+    };
+}
+
+function toServerConfig(clientConfig) {
+    return {
+        useLocalNews: clientConfig.news === 'local',
+        useLocalCoins: clientConfig.coins === 'local',
+    };
+}
 
 export const useApiConfig = () => {
-    const [config, setConfig] = useState(defaultConfig);
+    const [config, setConfig] = useState({ news: 'external', coins: 'external' });
     const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
 
+    // 1) Fetch config from server on mount
     useEffect(() => {
-        const loadConfig = async () => {
+        (async () => {
             try {
-                const storedConfig = await AsyncStorage.getItem(CONFIG_KEY);
-                if (storedConfig) {
-                    setConfig(JSON.parse(storedConfig));
-                }
-            } catch (error) {
-                console.error('Failed to load API config', error);
+                setLoading(true);
+                setError(null);
+                // Use the interceptor instance, which attaches the token automatically.
+                const response = await api.get(`/api/config`);
+                const mapped = toClientConfig(response.data);
+                setConfig(mapped);
+            } catch (err) {
+                console.error('Failed to load config from server:', err);
+                setError(err);
             } finally {
                 setLoading(false);
             }
-        };
-        loadConfig();
+        })();
     }, []);
 
-    const updateConfig = async (newConfig) => {
+    // 2) Update config on the server
+    const updateConfig = async (newClientConfig) => {
         try {
-            await AsyncStorage.setItem(CONFIG_KEY, JSON.stringify(newConfig));
-            setConfig(newConfig);
-        } catch (error) {
-            console.error('Failed to update API config', error);
+            setLoading(true);
+            setError(null);
+            const serverBody = toServerConfig(newClientConfig);
+            const response = await api.put(`/api/config`, serverBody);
+            const mapped = toClientConfig(response.data);
+            setConfig(mapped);
+        } catch (err) {
+            console.error('Failed to update config on server:', err);
+            setError(err);
+        } finally {
+            setLoading(false);
         }
     };
 
-    return { config, updateConfig, loading };
+    return { config, updateConfig, loading, error };
 };

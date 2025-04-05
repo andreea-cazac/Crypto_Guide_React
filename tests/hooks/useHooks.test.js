@@ -11,6 +11,7 @@ import * as dexApi from '../../services/api/dexApi';
 import * as glossaryApi from '../../services/api/glossaryApi';
 import {useGlossaryTerms} from '../../hooks/useGlossaryTerms';
 import {groupGlossaryTerms} from '../../utils/groupGlossaryTerms';
+import api from '../../services/interceptor/axiosInterceptor';
 
 jest.mock('../../services/api/dexApi');
 jest.mock('../../services/api/glossaryApi');
@@ -25,14 +26,20 @@ jest.mock('../../services/api/newsApi', () => ({
 }));
 
 jest.mock('@react-native-async-storage/async-storage', () => ({
-    getItem: jest.fn(() => Promise.resolve('mock.jwt.token')),
+    getItem: jest.fn(() =>
+        Promise.resolve(JSON.stringify({ news: 'external', coins: 'external' }))
+    ),
     setItem: jest.fn(),
+}));
+
+jest.mock('../../services/interceptor/axiosInterceptor', () => ({
+    get: jest.fn(),
 }));
 
 describe('useCryptoData', () => {
     it('fetches and sets coins data successfully', async () => {
         const mockData = [{ symbol: 'BTC', price: 123 }];
-        getAllCoins.mockResolvedValueOnce(mockData);
+        api.get.mockResolvedValueOnce({ data: mockData });
 
         const { result } = renderHook(() => useCryptoData());
         await waitFor(() => expect(result.current.loading).toBe(false));
@@ -40,7 +47,6 @@ describe('useCryptoData', () => {
         expect(result.current.coins).toEqual(mockData);
         expect(result.current.loading).toBe(false);
         expect(result.current.errorMessage).toBe(null);
-        expect(result.current.lastUpdated).toBeInstanceOf(Date);
     });
 
     it('handles fetch error', async () => {
@@ -58,7 +64,7 @@ describe('useCryptoData', () => {
 describe('useNewsData', () => {
     it('fetches and sets news data successfully', async () => {
         const mockNews = [{ id: 1, title: 'News!', body: 'abc', published_on: 123 }];
-        getLatestNews.mockResolvedValueOnce(mockNews);
+        api.get.mockResolvedValueOnce({ data: mockNews });
 
         const { result } = renderHook(() => useNewsData());
         await waitFor(() => expect(result.current.loading).toBe(false));

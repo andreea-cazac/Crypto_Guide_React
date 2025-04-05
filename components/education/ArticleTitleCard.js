@@ -9,18 +9,22 @@ export default function ArticleTitleCard({ title, content, index }) {
     return (
         <TouchableOpacity
             style={styles.card}
-            onPress={() => router.push({ pathname: '/article', params: { title, content } })}
+            onPress={() => router.push({
+                pathname: `/education/article`,
+                params: { title, content }
+            })}
         >
-            <Text style={styles.title}>{`${title}`}</Text>
+            <Text style={styles.title}>{title}</Text>
         </TouchableOpacity>
     );
 }
 
 const styles = StyleSheet.create({
     card: {
-        backgroundColor: GlobalStyle.colors.background,
+        backgroundColor: GlobalStyle.colors.secondary,
         padding: 16,
         marginVertical: 8,
+        marginHorizontal: 16,
         borderRadius: 12,
         shadowColor: GlobalStyle.colors.primary,
         shadowOffset: { width: 0, height: 2 },

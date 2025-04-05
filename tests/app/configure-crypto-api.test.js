@@ -14,6 +14,9 @@ jest.mock('@react-native-async-storage/async-storage', () => ({
         setItem: jest.fn(),
     },
 }));
+jest.mock('../../utils/confirmApiSwitch', () => ({
+    handleApiSelection: jest.fn((current, value, callback) => callback()),
+}));
 
 describe('ConfigureCryptoApiScreen', () => {
     it('renders loading state correctly', () => {
@@ -42,7 +45,7 @@ describe('ConfigureCryptoApiScreen', () => {
 
         // Verify the "external" button is active (style check)
         expect(getByTestId('external-button')).toHaveStyle({ backgroundColor: GlobalStyle.colors.primary });  // Use GlobalStyle for correct value
-        expect(getByTestId('local-button')).toHaveStyle({ backgroundColor: GlobalStyle.colors.subtleText });  // Use GlobalStyle for correct value
+        expect(getByTestId('local-button')).toHaveStyle({ backgroundColor: GlobalStyle.colors.background });  // Use GlobalStyle for correct value
     });
 
     it('renders correctly when config.coins is "local"', () => {
@@ -58,7 +61,7 @@ describe('ConfigureCryptoApiScreen', () => {
 
         // Verify the "local" button is active (style check)
         expect(getByTestId('local-button')).toHaveStyle({ backgroundColor: GlobalStyle.colors.primary });  // Use GlobalStyle for correct value
-        expect(getByTestId('external-button')).toHaveStyle({ backgroundColor: GlobalStyle.colors.subtleText });  // Use GlobalStyle for correct value
+        expect(getByTestId('external-button')).toHaveStyle({ backgroundColor: GlobalStyle.colors.background });  // Use GlobalStyle for correct value
     });
 
     it('calls handlePress and updates the config when "external" is pressed', () => {
@@ -119,7 +122,7 @@ describe('ConfigureCryptoApiScreen', () => {
             backgroundColor: GlobalStyle.colors.primary,
         });
         expect(getByTestIdRerender('local-button')).toHaveStyle({
-            backgroundColor: GlobalStyle.colors.subtleText,
+            backgroundColor: GlobalStyle.colors.background,
         });
     });
 
