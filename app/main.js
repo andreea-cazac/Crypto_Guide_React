@@ -1,28 +1,38 @@
 import React from 'react';
-import {StyleSheet, View} from 'react-native';
+import {ScrollView, StyleSheet, View} from 'react-native';
 import NavigationBar from '../components/NavigationBar';
 import {GlobalStyle} from "../constants/GlobalStyle";
 import {useCryptoData} from '../hooks/useCryptoData';
 import CryptoNowSection from '../components/feed/CryptoNowSection';
-import LatestNewsSection from "../components/feed/LatestNewsSection";
 import Header from "../components/Header";
+import {useSafeAreaInsets} from 'react-native-safe-area-context';
+import LatestNewsSection from "../components/feed/LatestNewsSection";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default function MainScreen() {
     const { coins, loading, errorMessage, lastUpdated } = useCryptoData();
+    const insets = useSafeAreaInsets();
 
+    AsyncStorage.getItem('jwtToken').then((token) => {
+        console.log(token);
+    });
     return (
         <View testID="MainScreen" style={styles.container}>
             <Header showBack={false} showAccount={true} />
-            <View style={styles.content}>
+
+            <ScrollView
+                style={styles.scroll}
+                contentContainerStyle={[styles.scrollContent, { paddingBottom: 80 + insets.bottom }]}
+            >
                 <CryptoNowSection
                     coins={coins}
                     loading={loading}
                     errorMessage={errorMessage}
                     lastUpdated={lastUpdated}
                 />
-
                 <LatestNewsSection />
-            </View>
+            </ScrollView>
+
             <NavigationBar />
         </View>
     );
@@ -33,8 +43,11 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: GlobalStyle.colors.background,
     },
-    content: {
+    scroll: {
         flex: 1,
+    },
+    scrollContent: {
         paddingHorizontal: 16,
+        paddingTop: 16,
     },
 });

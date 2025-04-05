@@ -1,4 +1,4 @@
-// hooks/usePaymentSheetInit.js
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useEffect } from 'react';
 import { Alert } from 'react-native';
 import { useStripe } from '@stripe/stripe-react-native';
@@ -7,6 +7,7 @@ import Constants from 'expo-constants';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {jwtDecode} from 'jwt-decode';
 import { getPaymentSheetParams } from '../services/api/paymentApi';
+import {refreshToken} from "./refreshToken";
 
 export const usePaymentSheetInit = () => {
     const { initPaymentSheet, presentPaymentSheet } = useStripe();
@@ -76,14 +77,22 @@ export const usePaymentSheetInit = () => {
         fetchPaymentSheetParams();
     }, []);
 
-    // Function to open the payment sheet.
     const openPaymentSheetHandler = async () => {
         const { error } = await presentPaymentSheet();
         if (error) {
             await handleError(`Error code: ${error.code}`, error.message);
         } else {
-            Alert.alert('Success', 'Your subscription is confirmed!');
-            // After a successful subscription, replace the screen to remove the PaymentScreen.
+
+            try {
+                await refreshToken();
+                Alert.alert('Success', 'Your subscription is confirmed!');
+            } catch (authError) {
+                await showErrorAlert('Login Failed', authError.message);
+                router.replace('/login');
+                return;
+            }
+
+
             router.replace('/account');
         }
     };

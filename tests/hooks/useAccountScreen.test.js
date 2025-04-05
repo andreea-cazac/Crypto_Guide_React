@@ -106,27 +106,39 @@ describe('useAccountScreen', () => {
         expect(mockUpdatePassword).toHaveBeenCalledWith('old', 'new', expect.any(Function));
     });
 
-    it('should navigate to /payment on subscribe', () => {
+    it('should navigate to /payment on subscribe', async () => {
+        AsyncStorage.getItem.mockResolvedValue('mock.jwt.token');
         const { result } = renderHook(() => useAccountScreen());
-        act(() => result.current.handleSubscribe());
+        await act(async () => {
+            await result.current.handleSubscribe();
+        });
         expect(mockPush).toHaveBeenCalledWith('/payment');
     });
 
-    it('should navigate to /main on user role test', () => {
+    it('should navigate to /main on user role test', async () => {
+        AsyncStorage.getItem.mockResolvedValue(null);
         const { result } = renderHook(() => useAccountScreen());
-        act(() => result.current.handleUserRoleTest());
+        await act(async () => {
+            result.current.handleUserRoleTest();
+        });
         expect(mockPush).toHaveBeenCalledWith('/main');
     });
 
-    it('should navigate to /dashboard on dashboard handler', () => {
+    it('should navigate to /dashboard on dashboard handler', async () => {
+        AsyncStorage.getItem.mockResolvedValue(null);
         const { result } = renderHook(() => useAccountScreen());
-        act(() => result.current.handleDashboard());
+        await act(async () => {
+            result.current.handleDashboard();
+        });
         expect(mockPush).toHaveBeenCalledWith('/dashboard');
     });
 
-    it('should call logout', () => {
+    it('should call logout', async () => {
+        AsyncStorage.getItem.mockResolvedValue(null);
         const { result } = renderHook(() => useAccountScreen());
-        act(() => result.current.logout());
+        await act(async () => {
+            result.current.logout();
+        });
         expect(mockLogout).toHaveBeenCalled();
     });
 });

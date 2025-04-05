@@ -30,6 +30,6 @@ const styles = StyleSheet.create({
     },
     label: {
         fontSize: 16,
-        color: GlobalStyle.colors.secondary,
+        color: GlobalStyle.colors.primary,
     },
 });

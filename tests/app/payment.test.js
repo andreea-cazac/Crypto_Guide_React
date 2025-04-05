@@ -52,7 +52,7 @@ describe('PaymentScreen Component', () => {
             isReady: false,
             openPaymentSheet: jest.fn(),
         });
-        const { queryByText, getByTestId } = render(<PaymentScreen />);
+        const { queryByText } = render(<PaymentScreen />);
         expect(queryByText('Subscribe')).toBeNull();
     });
 

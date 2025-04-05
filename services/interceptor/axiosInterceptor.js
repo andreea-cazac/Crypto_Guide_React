@@ -1,4 +1,5 @@
 import axios from 'axios';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import Constants from "expo-constants";
 
 const API_BASE_URL = Constants.expoConfig?.extra?.api_base_url;
@@ -10,10 +11,13 @@ const api = axios.create({
     },
 });
 
-// Optional: Attach token in future
 api.interceptors.request.use(
-    (config) => {
-        // config.headers.Authorization = `Bearer ${yourToken}`;
+    async (config) => {
+        const token = await AsyncStorage.getItem('jwtToken');
+
+        if (token) {
+             config.headers.Authorization = `Bearer ${token}`;
+        }
         return config;
     },
     (error) => Promise.reject(error)
@@ -21,9 +25,10 @@ api.interceptors.request.use(
 
 api.interceptors.response.use(
     (response) => response,
-    (error) => {
-        return Promise.reject(error);
-    }
+    (error) => Promise.reject(error)
 );
 
 export default api;
+
+
+

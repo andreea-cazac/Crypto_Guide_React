@@ -14,13 +14,15 @@ export const GlobalStyle = {
     successColor: successColor,
     subtleText: gray,
   },
-
+  fonts: {
+    title: 'Geogrotesque',
+  },
   components: {
     title: {
       fontSize: 30,
-      fontWeight: 'bold',
       marginVertical: 16,
       color: primaryColor,
+      fontFamily: 'Geogrotesque',
     },
   },
 };

@@ -1,12 +1,11 @@
 import React from 'react';
-import { View, StyleSheet } from 'react-native';
-import { useLocalSearchParams } from 'expo-router';
-import ArticleContentCard from '../components/exchange/ArticleContentCard';
-import BackArrow from '../components/BackArrow';
-import { useResolvedArticleContent } from '../hooks/useResolvedArticleContent';
-import NavigationBar from '../components/NavigationBar';
-import {GlobalStyle} from "../constants/GlobalStyle";
-import Header from "../components/Header";
+import {StyleSheet, View} from 'react-native';
+import {useLocalSearchParams} from 'expo-router';
+import ArticleContentCard from '../../components/education/ArticleContentCard';
+import {useResolvedArticleContent} from '../../hooks/useResolvedArticleContent';
+import NavigationBar from '../../components/NavigationBar';
+import {GlobalStyle} from "../../constants/GlobalStyle";
+import Header from "../../components/Header";
 
 export default function ArticleScreen() {
     const { title, content } = useLocalSearchParams();

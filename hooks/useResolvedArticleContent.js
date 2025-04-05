@@ -32,7 +32,7 @@ export const useResolvedArticleContent = (title, content) => {
 
                 setResolvedContent('');
                 setTableData(tableFormatted);
-            } catch (error) {
+            } catch (_error) {
                 setResolvedContent('');
                 setErrorMessage({
                     type: 'error',

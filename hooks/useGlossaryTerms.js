@@ -1,4 +1,3 @@
-// 📁 hooks/useGlossaryTerms.js
 import { useEffect, useState } from 'react';
 import { getAllGlossaryTerms } from '../services/api/glossaryApi';
 import { groupGlossaryTerms } from '../utils/groupGlossaryTerms';
@@ -16,7 +15,7 @@ export const useGlossaryTerms = () => {
                 const { grouped, alphabet } = groupGlossaryTerms(data);
                 setGroupedTerms(grouped);
                 setAlphabet(alphabet);
-            } catch (error) {
+            } catch (_error) {
                 setErrorMessage({
                     title: 'Oops! Something went wrong',
                     message: 'We couldn’t load the glossary. Please check your connection or try again later.',

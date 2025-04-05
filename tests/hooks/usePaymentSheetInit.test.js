@@ -1,4 +1,4 @@
-// tests/hooks/usePaymentSheetInit.test.js
+/* global setTimeout */
 import { renderHook, waitFor, act } from '@testing-library/react-native';
 import { Alert } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -20,12 +20,17 @@ jest.mock('expo-router', () => ({
 
 jest.mock('@react-native-async-storage/async-storage', () => ({
     getItem: jest.fn(),
+    clear: jest.fn().mockResolvedValue(),
 }));
 
 jest.mock('jwt-decode', () => jest.fn());
 
 jest.mock('../../services/api/paymentApi', () => ({
     getPaymentSheetParams: jest.fn(),
+}));
+
+jest.mock('../../hooks/refreshToken', () => ({
+    refreshToken: jest.fn().mockResolvedValue({ sub: 'user@example.com' }),
 }));
 
 // Helper to flush pending promises.

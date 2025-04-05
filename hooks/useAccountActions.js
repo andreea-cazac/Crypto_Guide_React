@@ -10,7 +10,7 @@ export const useAccountActions = () => {
 
     const updatePassword = (currentPassword, newPassword, onSuccess) => {
         if (!currentPassword.trim() || !newPassword.trim()) {
-            Alert.alert('Validation Error', 'Please fill in both current and new password fields.');
+            Alert.alert('Error', 'Please fill in both current and new password fields.');
             return;
         }
         Alert.alert(

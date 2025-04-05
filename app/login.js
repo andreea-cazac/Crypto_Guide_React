@@ -1,18 +1,23 @@
-// screens/login.js
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import {
-    View,
+    ActivityIndicator,
+    Alert,
+    Image,
+    Keyboard,
+    KeyboardAvoidingView,
+    Platform,
+    ScrollView,
+    StyleSheet,
     Text,
     TextInput,
     TouchableOpacity,
-    StyleSheet,
-    Alert,
-    ActivityIndicator
+    TouchableWithoutFeedback,
+    View,
 } from 'react-native';
-import { useRouter } from 'expo-router';
-import { jwtDecode } from 'jwt-decode';
-import { useLogin } from '../hooks/useLogin';
-import { GlobalStyle } from "../constants/GlobalStyle";
+import {useRouter} from 'expo-router';
+import {jwtDecode} from 'jwt-decode';
+import {useLogin} from '../hooks/useLogin';
+import {GlobalStyle} from "../constants/GlobalStyle";
 
 export default function LoginScreen() {
     const router = useRouter();
@@ -23,19 +28,16 @@ export default function LoginScreen() {
     const [emailError, setEmailError] = useState(false);
     const [passwordError, setPasswordError] = useState(false);
 
-    // RegEx for email validation
     const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
     const handleLogin = async () => {
-        // Reset error flags
         setEmailError(false);
         setPasswordError(false);
 
-        // Validate fields
         if (!email.trim()) {
             setEmailError(true);
         } else if (!emailRegex.test(email.trim())) {
-            setEmailError(true); // Invalid email format
+            setEmailError(true);
         }
         if (!password.trim()) setPasswordError(true);
 
@@ -46,14 +48,12 @@ export default function LoginScreen() {
 
         try {
             const data = await login(email, password);
-            // Decode the token to check the role
             const decoded = jwtDecode(data.token);
             const roles = decoded.role;
             const isAdmin = roles &&
                 Array.isArray(roles) &&
                 roles.some(roleObj => roleObj.authority === 'ROLE_admin');
 
-            // Redirect based on role
             if (isAdmin) {
                 router.push('/dashboard');
             } else {
@@ -65,8 +65,21 @@ export default function LoginScreen() {
     };
 
     return (
-        <View style={styles.container}>
-            <Text style={GlobalStyle.components.title}>Welcome Back</Text>
+        <KeyboardAvoidingView
+            style={{ flex: 1 }}
+            behavior={Platform.OS === 'ios' ? 'padding' : undefined}
+            keyboardVerticalOffset={Platform.OS === 'ios' ? 0 : 0}
+        >
+            <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+                <ScrollView
+                    contentContainerStyle={styles.scrollContainer}
+                    keyboardShouldPersistTaps="handled"
+                >
+            <Image
+                source={require('../assets/icons/crypto_guide_logo.png')}
+                style={styles.logo}
+            />
+            <Text style={GlobalStyle.components.title}>Welcome to Crypto Guide</Text>
             <View style={styles.form}>
                 <TextInput
                     style={[styles.input, (emailError && styles.errorInput)]}
@@ -98,18 +111,20 @@ export default function LoginScreen() {
                 )}
                 {error && <Text style={styles.errorText}>{error}</Text>}
             </View>
-        </View>
+            </ScrollView>
+        </TouchableWithoutFeedback>
+</KeyboardAvoidingView>
     );
 }
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: GlobalStyle.colors.background,
+    scrollContainer: {
+        flexGrow: 1,
         alignItems: 'center',
         justifyContent: 'center',
         padding: 16,
-    },
+        backgroundColor: GlobalStyle.colors.background,
+        },
     form: {
         width: '100%',
     },
@@ -146,5 +161,12 @@ const styles = StyleSheet.create({
         color: GlobalStyle.colors.errorColor,
         textAlign: 'center',
         marginTop: 8,
+    },
+    logo: {
+        width: 300,
+        height: 300,
+        resizeMode: 'contain',
+        marginBottom: 24,
+        alignSelf: 'center',
     },
 });

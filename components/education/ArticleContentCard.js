@@ -1,5 +1,5 @@
 import React from 'react';
-import {ScrollView, StyleSheet, Text, View} from 'react-native';
+import {ScrollView, StyleSheet, Text} from 'react-native';
 import {GlobalStyle} from '../../constants/GlobalStyle';
 import {calculateReadingTime} from '../../utils/calcReadingTime';
 import DynamicTable from '../DynamicTable';

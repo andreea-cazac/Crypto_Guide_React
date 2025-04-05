@@ -1,18 +1,18 @@
-// app/configure-crypto-api.js
 import React from 'react';
-import { View, Text, TouchableOpacity, StyleSheet, ActivityIndicator } from 'react-native';
+import {ActivityIndicator, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import Header from '../components/Header';
-import { GlobalStyle } from '../constants/GlobalStyle';
-import { useApiConfig } from '../hooks/useApiConfig';
-import { useRouter } from 'expo-router';
+import {GlobalStyle} from '../constants/GlobalStyle';
+import {useApiConfig} from '../hooks/useApiConfig';
+import {handleApiSelection} from "../utils/confirmApiSwitch";
 
 export default function ConfigureCryptoApiScreen() {
     const { config, updateConfig, loading } = useApiConfig();
-    const router = useRouter();
 
     const handlePress = (value) => {
-        const newConfig = { ...config, coins: value };
-        updateConfig(newConfig);
+        handleApiSelection(config.coins, value, () => {
+            const newConfig = { ...config, coins: value };
+            updateConfig(newConfig);
+        });
     };
 
     if (loading) {
@@ -81,10 +81,12 @@ const styles = StyleSheet.create({
     inactiveButton: {
         width: '80%',
         padding: 15,
-        backgroundColor: GlobalStyle.colors.subtleText,
+        backgroundColor: GlobalStyle.colors.background,
         borderRadius: 8,
         marginBottom: 15,
         alignItems: 'center',
+        borderWidth: 2,
+        borderColor: GlobalStyle.colors.secondary,
     },
     activeButtonText: {
         color: GlobalStyle.colors.background,

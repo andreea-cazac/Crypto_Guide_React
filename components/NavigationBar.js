@@ -2,8 +2,8 @@ import React from 'react';
 import {Image, StyleSheet, TouchableOpacity, View} from 'react-native';
 import {useRouter} from 'expo-router';
 import educationIcon from '../assets/icons/education.png';
-import feedIcon from '../assets/icons/feed.png';
-import communityIcon from '../assets/icons/community.png';
+import feedIcon from '../assets/icons/news.png';
+import communityIcon from '../assets/icons/public.png';
 import {GlobalStyle} from '../constants/GlobalStyle';
 
 export default function NavigationBar() {
@@ -18,7 +18,7 @@ export default function NavigationBar() {
                 <Image source={feedIcon} style={styles.iconImage} testID="feed-icon"/>
             </TouchableOpacity>
             <TouchableOpacity style={styles.icon} accessibilityRole="button" testID="nav-community" onPress={() => router.push('/community')}>
-                <Image source={communityIcon} style={styles.iconImage} testID="community-icon"/>
+                <Image source={communityIcon} style={styles.iconCommunity} testID="community-icon"/>
             </TouchableOpacity>
         </View>
     );
@@ -43,4 +43,9 @@ const styles = StyleSheet.create({
         height: 40,
         tintColor: GlobalStyle.colors.primary,
     },
+    iconCommunity: {
+        width:45,
+        height: 45,
+        tintColor: GlobalStyle.colors.primary,
+    }
 });

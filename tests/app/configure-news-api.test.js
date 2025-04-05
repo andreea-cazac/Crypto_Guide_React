@@ -13,6 +13,9 @@ jest.mock('@react-native-async-storage/async-storage', () => ({
         setItem: jest.fn(),
     },
 }));
+jest.mock('../../utils/confirmApiSwitch', () => ({
+    handleApiSelection: jest.fn((current, value, callback) => callback()),
+}));
 
 describe('ConfigureNewsApiScreen', () => {
     it('renders loading state correctly', () => {

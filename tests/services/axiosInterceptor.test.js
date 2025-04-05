@@ -1,4 +1,9 @@
 import api from '../../services/interceptor/axiosInterceptor';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
+jest.mock('@react-native-async-storage/async-storage', () =>
+    require('@react-native-async-storage/async-storage/jest/async-storage-mock')
+);
 
 jest.mock('expo-constants', () => ({
     expoConfig: {
@@ -9,16 +14,33 @@ jest.mock('expo-constants', () => ({
 }));
 
 describe('axiosInterceptor', () => {
+    beforeEach(() => {
+        jest.clearAllMocks();
+    });
+
     it('should create axios instance with correct baseURL and headers', () => {
         expect(api.defaults.baseURL).toBe('https://mock-api.com');
         expect(api.defaults.headers['Content-Type']).toBe('application/json');
     });
 
-    it('should pass through request in interceptor', async () => {
+    it('should attach Authorization header if token is present', async () => {
+        AsyncStorage.getItem.mockResolvedValue('test-token');
+
         const config = { headers: {} };
 
         const result = await api.interceptors.request.handlers[0].fulfilled(config);
-        expect(result).toEqual(config);
+
+        expect(result.headers.Authorization).toBe('Bearer test-token');
+    });
+
+    it('should not attach Authorization header if token is not found', async () => {
+        AsyncStorage.getItem.mockResolvedValue(null);
+
+        const config = { headers: {} };
+
+        const result = await api.interceptors.request.handlers[0].fulfilled(config);
+
+        expect(result.headers.Authorization).toBeUndefined();
     });
 
     it('should reject request interceptor error', async () => {

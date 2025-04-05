@@ -1,9 +1,7 @@
-// 📁 components/Header.js
 import React from 'react';
-import { View, StyleSheet } from 'react-native';
+import {StyleSheet, View} from 'react-native';
 import BackArrow from './BackArrow';
 import AccountIcon from './AccountIcon';
-import { GlobalStyle } from '../constants/GlobalStyle';
 
 export default function Header({ showBack = true, showAccount = true }) {
     return (
@@ -21,7 +19,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         paddingTop: 5,
         paddingHorizontal: 16,
-        marginBottom: 10, // Adjusted for consistency with Glossary
+        marginBottom: 10,
     },
     backArrow: {
         marginLeft: 0,
