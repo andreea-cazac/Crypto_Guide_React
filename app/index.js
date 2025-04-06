@@ -14,8 +14,6 @@ export default function Index() {
                 const decoded = jwtDecode(token);
                 const email = decoded.sub;
 
-                // console.log(token);
-                // console.log(email);
                 if (!token || !email) {
                     setRedirectPath('/login');
                     return;

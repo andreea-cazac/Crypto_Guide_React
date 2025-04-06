@@ -13,9 +13,6 @@ export default function MainScreen() {
     const { coins, loading, errorMessage, lastUpdated } = useCryptoData();
     const insets = useSafeAreaInsets();
 
-    AsyncStorage.getItem('jwtToken').then((token) => {
-        console.log(token);
-    });
     return (
         <View testID="MainScreen" style={styles.container}>
             <Header showBack={false} showAccount={true} />
