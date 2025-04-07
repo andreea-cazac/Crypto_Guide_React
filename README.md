@@ -1,7 +1,7 @@
 # Welcome to CryptoGuide app 👋
 
 ## Get started
-
+### *Disclaimer*  The APK build is unable to load environment variables, which is why we've set the default landing page to Main. However, when using the Expo Go app, everything functions as expected.
 1. Install dependencies
 
    ```bash
@@ -45,8 +45,6 @@ The .env.development file in the end will have this values (for EXPO_PUBLIC_API_
 <p> EXPO_PUBLIC_STRIPE_PUBLIC_KEY=pk_test_51R1TfJ4gHyUjWEHad8KKs0w8q1msqh8iEWSirif59NCU7M4DE9rzgEbzJKPZTHoWxZCbxeM0vVp7NpEnYQxideL200Ehim3DC9 </p>
 
 These credentials are not sensitive since we are using testing methods for Stripe.
-
-The APK could not recognize the environment variables, this is why further than Login screen you will not be able to navigate.
 
 Locally using Expo Go and connecting via Expo Go app with your phone will work. 
 
