@@ -20,6 +20,7 @@ export default ({ config }) => ({
         supportsTablet: true,
     },
     android: {
+        package: "com.yourcompany.cryptoguide",
         adaptiveIcon: {
             foregroundImage: "./assets/icons/crypto_guide_logo.png",
             backgroundColor: "#ffffff",
@@ -52,5 +53,8 @@ export default ({ config }) => ({
         payment_endpoint: process.env.EXPO_PUBLIC_PAYMENT_ENDPOINT,
         stripePriceId: process.env.EXPO_PUBLIC_STRIPE_PRICE_ID,
         stripePublicKey: process.env.EXPO_PUBLIC_STRIPE_PUBLIC_KEY,
+        eas: {
+            projectId: "ea4903f4-d947-43bd-b1e9-e66361392909"
+        },
     },
 });
